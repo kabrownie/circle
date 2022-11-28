@@ -7,11 +7,11 @@ public class client {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
 
-        System.out.println("Enter Server Address: ");
         String serverName;
-        serverName = userInput.next();
+        serverName ="localhost";
+        System.out.println("Connected to localhost server :)");
 
-        System.out.println("Enter Port Number: ");
+        System.out.println("Enter server  Port Number: ");
         String port;
         port = userInput.next();
 
@@ -25,7 +25,7 @@ public class client {
             System.out.println("Enter the radius of the circle: ");
 
 //userInput.nextInt();
-          double x = userInput.nextDouble();
+          Double x = userInput.nextDouble();
 
 //  System.out.println("hello");
 
@@ -38,7 +38,7 @@ public class client {
             InputStream inFromServer = client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServer);
             System.out.println("Server responds: " + in.read());
-            client.close();
+//            client.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

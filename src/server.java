@@ -1,13 +1,12 @@
 
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class server extends Thread {
-    private ServerSocket serverSocket;
+    private static ServerSocket serverSocket;
 
-    public server(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
+    public server(ServerSocket port) throws IOException {
+        serverSocket = new ServerSocket(6000);
 
     }
 
@@ -19,14 +18,14 @@ public class server extends Thread {
                 System.out.println("Just connected to " + server.getRemoteSocketAddress());
                 DataInputStream in = new DataInputStream(server.getInputStream());
 
-                    double pi = 3.142;
+                    Double pi = 3.142;
 
-               double x = in.readInt();
+               Double x = in.readDouble();
               System.out.println("radius recieved");
-                double area = (pi * x *x);
+                Double area = (pi * Math.pow(x, 2));
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
 
-                // System.out.println(sum);
+                System.out.println(area);
                 out.writeDouble(area);
 
                 server.close();
@@ -40,13 +39,10 @@ public class server extends Thread {
 
     public static void main(String[] args) {
 
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Please specify a port number (1~65535): ");
-        String port;
-        port = userInput.next();
+
 
         try {
-            Thread t = new server(Integer.parseInt(port));
+            Thread t = new server((serverSocket));
             t.start();
         } catch (IOException e) {
             e.printStackTrace();
